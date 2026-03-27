@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liquidity Predictor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<div class="app">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <h1 class="header__logo">Liquidity Predictor</h1>
+    <p class="header__sub">Prédiction IA · TensorFlow.js</p>
+  </header>
+
+  <!-- ═══ TOP BAR ═══ -->
+  <div class="topbar">
+
+    <!-- Asset Selector -->
+    <div class="glass select-group">
+      <label for="assetSelect">Actif</label>
+      <div class="select-wrapper">
+        <select class="assetSelect" id="actif">
+          <option value="crypto">Crypto</option>
+          <option value="forex">Forex</option>        
+          <option value="action">Actions</option>
+                </select>
+
+      </div>
+      <div class="selec-wrapper">
+        <select class="assetSelect" id="forex">
+          <option value="eurousd">EURO/USD</option>
+          <option value="jpyeuro">JPY/EUR</option>
+          <option value="gbpeuro">GBP/EUR</option>
+          <option value="chfeuro">CHF/EUR</option>
+        </select>
+      </div>
+
+      <div class="select-wrapper">
+        <select class="assetSelect" id="action">
+          <option value="MC">LVMH</option>
+          <option value="TTE">TotalEnergie</option>
+        </select>
+      </div>
+      <div class="select-wrapper">
+        <select id="assetSelect">
+          <option value="BTCUSDT">BTC — Bitcoin</option>
+          <option value="ETHUSDT">ETH — Ethereum</option>
+          <option value="BNBUSDT">BNB — Binance Coin</option>
+          <option value="SOLUSDT">SOL — Solana</option>
+          <option value="XRPUSDT">XRP — Ripple</option>
+          <option value="ADAUSDT">ADA — Cardano</option>
+          <option value="DOGEUSDT">DOGE — Dogecoin</option>
+          <option value="DOTUSDT">DOT — Polkadot</option>
+          <option value="AVAXUSDT">AVAX — Avalanche</option>
+          <option value="LINKUSDT">LINK — Chainlink</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Current Price -->
+    <div class="glass price-display">
+      <span class="price-display__label">Prix actuel</span>
+      <div class="price-display__value" id="currentPrice">—<span class="currency">USDT</span></div>
+      <div class="price-display__change up" id="priceChange">—</div>
+    </div>
+
+    <!-- Status -->
+    <div class="glass status-box">
+      <div class="status-indicator">
+        <div class="status-dot ready" id="statusDot"></div>
+        <span class="status-text" id="statusText">Prêt</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ TIMEFRAME ═══ -->
+  <div class="timeframe-bar glass">
+    <button class="timeframe-btn active" data-period="30">1M</button>
+    <button class="timeframe-btn" data-period="180">6M</button>
+    <button class="timeframe-btn" data-period="365">1A</button>
+    <button class="timeframe-btn" data-period="1825">5A</button>
+  </div>
+
+  <!-- ═══ CHART ═══ -->
+  <div class="chart-panel glass">
+    <div id="chartContainer">
+      <p class="chart-placeholder">▶ Charger les données pour afficher le graphique</p>
+      <!-- Ton canvas / chart ici -->
+      <canvas id="priceChart" style="display:none; width:100%; height:100%;"></canvas>
+    </div>
+  </div>
+
+  <!-- ═══ PROGRESS BAR ═══ -->
+  <div class="progress-section" id="progressSection">
+    <div class="progress-label"><span id="progressLabel">Entraînement — Epoch 0 / 200</span></div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- ═══ LOG ═══ -->
+  <div class="log-panel glass" id="logPanel">
+    <div id="logContent"></div>
+  </div>
+
+  <!-- ═══ ACTION BUTTONS ═══ -->
+  <div class="actions">
+    <button class="btn btn--load" id="btnLoad">⟳ Charger les données</button>
+    <button class="btn btn--predict" id="btnPredict">⚡ Prédire</button>
+  </div>
+
+  <!-- ═══ PREDICTION RESULT ═══ -->
+  <div class="prediction-panel glass" id="predictionPanel">
+    <div class="prediction-panel__label">Prédiction J+1</div>
+    <div class="prediction-panel__value" id="predictionValue">— USDT</div>
+    <div class="prediction-panel__meta" id="predictionMeta">Modèle : Dense 16→8→1 · 200 epochs</div>
+  </div>
+
+  <div class="footer">NeuraTrade · JLQ Développement · 2026</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="script.js" defer></script>
+</body>
+</html>
